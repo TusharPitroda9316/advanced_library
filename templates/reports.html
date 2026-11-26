@@ -1,0 +1,102 @@
+
+{% extends 'base.html' %}
+{% block title %}Reports{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <h2>Library Reports</h2>
+        <p>Summary of library activities.</p>
+    </div>
+    <button onclick="window.print()" class="btn btn-dark">
+        Print Report
+    </button>
+</div>
+
+<div class="row g-3 mb-4">
+
+    <div class="col-md-4">
+        <div class="stat-card blue">
+            <span>Total Loans</span>
+            <h2>{{ total_loans }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="stat-card green">
+            <span>Returned Books</span>
+            <h2>{{ returned_count }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="stat-card red">
+            <span>Total Fines Collected</span>
+            <h2>₹{{ total_fines }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<div class="content-card mb-4">
+    <h5>Overdue Books</h5>
+
+    <div class="table-responsive">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Book</th>
+                    <th>Member</th>
+                    <th>Due Date</th>
+                    <th>Current Fine</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for loan in overdue_loans %}
+                <tr>
+                    <td>{{ loan.book.title }}</td>
+                    <td>{{ loan.member.name }}</td>
+                    <td>{{ loan.due_date }}</td>
+                    <td>₹{{ loan.current_fine }}</td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4" class="text-center">
+                        No overdue books.
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="content-card">
+    <h5>Most Borrowed Books</h5>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Book Title</th>
+                <th>Number of Issues</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for title, count in most_borrowed %}
+            <tr>
+                <td>{{ title }}</td>
+                <td>{{ count }}</td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2" class="text-center">
+                    No borrowing data available.
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

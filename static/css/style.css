@@ -1,0 +1,255 @@
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f4f6fb;
+    font-family: Arial, sans-serif;
+    color: #263248;
+}
+
+.sidebar {
+    width: 250px;
+    height: 100vh;
+    background: #17243b;
+    color: white;
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 25px 15px;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+}
+
+.brand {
+    font-weight: bold;
+    padding: 5px 10px 25px;
+    color: #ffffff;
+}
+
+.sidebar-label {
+    color: #8794a9;
+    font-size: 11px;
+    letter-spacing: 1.5px;
+    padding-left: 12px;
+    margin-top: 10px;
+}
+
+.sidebar a {
+    color: #c4cede;
+    display: block;
+    text-decoration: none;
+    padding: 13px 12px;
+    margin: 3px 0;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background: #293b5c;
+    color: white;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+    font-size: 13px;
+    color: #c4cede;
+    padding: 10px;
+}
+
+.main-content {
+    margin-left: 250px;
+    padding: 30px;
+    min-height: 100vh;
+}
+
+.login-container {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #17243b, #4263a0);
+}
+
+.login-card {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 35px;
+    border-radius: 16px;
+}
+
+.login-icon {
+    font-size: 48px;
+    margin-bottom: 10px;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    gap: 15px;
+}
+
+.page-heading h2 {
+    font-weight: 700;
+    margin: 0 0 6px;
+}
+
+.page-heading p {
+    color: #8290a5;
+    margin: 0;
+}
+
+.date-label {
+    color: #66758c;
+    font-size: 14px;
+}
+
+.stat-card {
+    padding: 20px;
+    border-radius: 13px;
+    background: white;
+    min-height: 145px;
+    box-shadow: 0 3px 12px rgba(30, 50, 80, 0.05);
+    border-left: 4px solid;
+}
+
+.stat-card span {
+    font-size: 13px;
+    color: #778399;
+}
+
+.stat-card h2 {
+    font-size: 27px;
+    margin: 15px 0 8px;
+    font-weight: bold;
+}
+
+.stat-card small {
+    color: #8290a5;
+}
+
+.blue { border-color: #4285f4; }
+.green { border-color: #28a66a; }
+.purple { border-color: #8e63d9; }
+.orange { border-color: #f39c35; }
+.red { border-color: #e45252; }
+.teal { border-color: #21a6a6; }
+
+.content-card {
+    background: white;
+    border-radius: 13px;
+    padding: 22px;
+    box-shadow: 0 3px 12px rgba(30, 50, 80, 0.05);
+}
+
+.content-card h5 {
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.form-card {
+    max-width: 720px;
+}
+
+.form-control,
+.form-select {
+    padding: 11px;
+    border-radius: 7px;
+}
+
+.form-label {
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.table {
+    vertical-align: middle;
+}
+
+.table thead th {
+    font-size: 12px;
+    color: #8190a5;
+    text-transform: uppercase;
+    white-space: nowrap;
+}
+
+.table tbody td {
+    font-size: 13px;
+}
+
+.quick-action {
+    display: block;
+    padding: 14px;
+    background: #f4f7fc;
+    border-radius: 8px;
+    text-decoration: none;
+    color: #344766;
+    margin-bottom: 10px;
+    transition: 0.2s;
+}
+
+.quick-action:hover {
+    background: #e4edfb;
+    color: #245bc0;
+}
+
+.btn {
+    border-radius: 7px;
+}
+
+@media(max-width: 900px) {
+    .sidebar {
+        width: 190px;
+    }
+
+    .main-content {
+        margin-left: 190px;
+        padding: 20px;
+    }
+}
+
+@media(max-width: 650px) {
+    .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .sidebar-bottom {
+        margin-top: 10px;
+    }
+
+    .main-content {
+        margin-left: 0;
+        padding: 15px;
+    }
+
+    .page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media print {
+    .sidebar,
+    .page-heading button,
+    .btn {
+        display: none !important;
+    }
+
+    .main-content {
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        background: white;
+    }
+}

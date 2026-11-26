@@ -1,0 +1,131 @@
+
+{% extends 'base.html' %}
+{% block title %}Dashboard{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <h2>Dashboard</h2>
+        <p>Welcome to your library management system.</p>
+    </div>
+    <span class="date-label">{{ today if today else "Library Overview" }}</span>
+</div>
+
+<div class="row g-3">
+
+    <div class="col-md-4 col-xl-2">
+        <div class="stat-card blue">
+            <span>Total Copies</span>
+            <h2>{{ total_books }}</h2>
+            <small>Library inventory</small>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-xl-2">
+        <div class="stat-card green">
+            <span>Members</span>
+            <h2>{{ total_members }}</h2>
+            <small>Registered users</small>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-xl-2">
+        <div class="stat-card purple">
+            <span>Available</span>
+            <h2>{{ available_books }}</h2>
+            <small>Available copies</small>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-xl-2">
+        <div class="stat-card orange">
+            <span>Issued</span>
+            <h2>{{ total_issued }}</h2>
+            <small>Currently borrowed</small>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-xl-2">
+        <div class="stat-card red">
+            <span>Overdue</span>
+            <h2>{{ overdue_count }}</h2>
+            <small>Late returns</small>
+        </div>
+    </div>
+
+    <div class="col-md-4 col-xl-2">
+        <div class="stat-card teal">
+            <span>Fines</span>
+            <h2>₹{{ fine_collected }}</h2>
+            <small>Collected fines</small>
+        </div>
+    </div>
+
+</div>
+
+<div class="row mt-4 g-3">
+    <div class="col-lg-8">
+        <div class="content-card">
+            <h5>Recent Transactions</h5>
+
+            <div class="table-responsive">
+                <table class="table align-middle">
+                    <thead>
+                        <tr>
+                            <th>Book</th>
+                            <th>Member</th>
+                            <th>Issue Date</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for loan in recent_loans %}
+                        <tr>
+                            <td>{{ loan.book.title }}</td>
+                            <td>{{ loan.member.name }}</td>
+                            <td>{{ loan.issue_date }}</td>
+                            <td>{{ loan.due_date }}</td>
+                            <td>
+                                <span class="badge
+                                {% if loan.status == 'Returned' %}bg-success
+                                {% elif loan.status == 'Overdue' %}bg-danger
+                                {% else %}bg-warning text-dark{% endif %}">
+                                    {{ loan.status }}
+                                </span>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5" class="text-center">
+                                No transactions available.
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="content-card">
+            <h5>Quick Actions</h5>
+
+            <a href="{{ url_for('add_book') }}"
+               class="quick-action">+ Add New Book</a>
+
+            <a href="{{ url_for('add_member') }}"
+               class="quick-action">+ Register Member</a>
+
+            <a href="{{ url_for('issue_book') }}"
+               class="quick-action">+ Issue Book</a>
+
+            <a href="{{ url_for('reports') }}"
+               class="quick-action">View Reports</a>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

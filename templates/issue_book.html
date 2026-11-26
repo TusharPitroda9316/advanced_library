@@ -1,0 +1,55 @@
+
+{% extends 'base.html' %}
+{% block title %}Issue Book{% endblock %}
+
+{% block content %}
+
+<div class="page-heading">
+    <div>
+        <h2>Issue a Book</h2>
+        <p>Assign an available book to a registered member.</p>
+    </div>
+</div>
+
+<div class="content-card form-card">
+    <form method="POST">
+        <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+        <div class="mb-4">
+            <label class="form-label">Select Book *</label>
+            <select name="book_id" class="form-select" required>
+                <option value="">Choose a book</option>
+                {% for book in books %}
+                <option value="{{ book.id }}">
+                    {{ book.title }} — {{ book.author }}
+                    ({{ book.available_count }} available)
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="mb-4">
+            <label class="form-label">Select Member *</label>
+            <select name="member_id" class="form-select" required>
+                <option value="">Choose a member</option>
+                {% for member in members %}
+                <option value="{{ member.id }}">
+                    {{ member.name }} — {{ member.email }}
+                </option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="alert alert-info">
+            Standard loan period: 14 days.
+            Late fine: ₹5 per overdue day.
+        </div>
+
+        <button class="btn btn-primary">Confirm Issue</button>
+        <a href="{{ url_for('loans') }}" class="btn btn-secondary">
+            Cancel
+        </a>
+    </form>
+</div>
+
+{% endblock %}
